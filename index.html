@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NexusAI - Intelligent Assistant</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <svg class="logo-icon" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="14" stroke="#6c63ff" stroke-width="2"/>
+            <circle cx="16" cy="16" r="6" fill="#6c63ff" opacity="0.6"/>
+            <circle cx="16" cy="16" r="2" fill="#00d4aa"/>
+            <line x1="16" y1="2" x2="16" y2="8" stroke="#6c63ff" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="16" y1="24" x2="16" y2="30" stroke="#6c63ff" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="2" y1="16" x2="8" y2="16" stroke="#6c63ff" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="24" y1="16" x2="30" y2="16" stroke="#6c63ff" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span class="logo-text">NexusAI</span>
+        </div>
+        <button class="btn-new-chat" id="btnNewChat">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          New Chat
+        </button>
+      </div>
+      <div class="sidebar-search">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <input type="text" placeholder="Search conversations..." id="searchInput">
+      </div>
+      <div class="sidebar-conversations" id="conversationList"></div>
+      <div class="sidebar-footer">
+        <div class="sidebar-footer-item">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M8 5v3l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>History</span>
+        </div>
+        <div class="sidebar-footer-item">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <circle cx="8" cy="4" r="2.5" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M2.5 14c0-3 2.5-5 5.5-5s5.5 2 5.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>Ezechias</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Sidebar overlay for mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Chat Area -->
+    <main class="chat-main">
+      <header class="chat-header">
+        <button class="btn-hamburger" id="btnHamburger">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="chat-header-title">
+          <h1 id="chatTitle">NexusAI</h1>
+          <span class="model-badge">GPT-4 Turbo</span>
+        </div>
+        <div class="chat-header-actions">
+          <button class="btn-icon" title="Share conversation">
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
+              <circle cx="12" cy="3" r="2" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="4" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="12" cy="13" r="2" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M5.8 7l4.4-3M5.8 9l4.4 3" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <div class="chat-messages" id="chatMessages">
+        <!-- Welcome screen -->
+        <div class="welcome-screen" id="welcomeScreen">
+          <div class="welcome-icon">
+            <svg viewBox="0 0 64 64" fill="none">
+              <circle cx="32" cy="32" r="28" stroke="url(#grad1)" stroke-width="2.5"/>
+              <circle cx="32" cy="32" r="12" fill="url(#grad1)" opacity="0.15"/>
+              <circle cx="32" cy="32" r="4" fill="#00d4aa"/>
+              <defs>
+                <linearGradient id="grad1" x1="0" y1="0" x2="64" y2="64">
+                  <stop offset="0%" stop-color="#6c63ff"/>
+                  <stop offset="100%" stop-color="#00d4aa"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <h2>How can I help you today?</h2>
+          <p class="welcome-sub">I'm NexusAI, your intelligent coding assistant. Ask me anything about programming, debugging, or software architecture.</p>
+          <div class="suggestion-cards">
+            <button class="suggestion-card" data-prompt="Explain React hooks with examples">
+              <div class="suggestion-icon" style="color:#6c63ff">
+                <svg width="20" height="20" viewBox="0 0 16 16" fill="none"><path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              <div>
+                <strong>Explain React hooks</strong>
+                <span>with practical examples</span>
+              </div>
+            </button>
+            <button class="suggestion-card" data-prompt="Write a Python script to scrape a website">
+              <div class="suggestion-icon" style="color:#00d4aa">
+                <svg width="20" height="20" viewBox="0 0 16 16" fill="none"><path d="M4 4h8M4 8h5M4 12h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              <div>
+                <strong>Write a Python script</strong>
+                <span>to scrape a website</span>
+              </div>
+            </button>
+            <button class="suggestion-card" data-prompt="Help me debug my code that has an error">
+              <div class="suggestion-icon" style="color:#ff6b6b">
+                <svg width="20" height="20" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3M8 10v1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              <div>
+                <strong>Debug my code</strong>
+                <span>find and fix errors</span>
+              </div>
+            </button>
+            <button class="suggestion-card" data-prompt="Explain async/await in JavaScript">
+              <div class="suggestion-icon" style="color:#ffd93d">
+                <svg width="20" height="20" viewBox="0 0 16 16" fill="none"><path d="M2 8h4l2-5 2 10 2-5h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div>
+                <strong>Explain async/await</strong>
+                <span>JavaScript concurrency</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input Area -->
+      <div class="chat-input-container">
+        <div class="chat-input-wrapper">
+          <textarea id="messageInput" placeholder="Message NexusAI..." rows="1"></textarea>
+          <button class="btn-send" id="btnSend" disabled>
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
+              <path d="M14 2L7 9M14 2l-5 12-2-5-5-2 12-5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+        <p class="input-disclaimer">NexusAI may produce inaccurate information. Verify important facts independently.</p>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
